@@ -1,6 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-commerceSystem", "E-commerceSystem\E-commerceSystem.csproj", "{F3C22ED3-E95E-43E6-906D-568E8AEAB270}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-commerceSystem.Web", "E-commerceSystem.Web\E-commerceSystem.Web.csproj", "{F3C22ED3-E95E-43E6-906D-568E8AEAB270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-commerceSystem.DataAccessLayer", "E-commerceSystem.DataAccessLayer\E-commerceSystem.DataAccessLayer.csproj", "{37AAE12C-CF2C-467E-8926-168EF678AFD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-commerceSystem.BusinessLogicLayer", "E-commerceSystem.BusinessLogicLayer\E-commerceSystem.BusinessLogicLayer.csproj", "{942AA48B-30D5-4939-B690-D465ADA4B6CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +16,13 @@ Global
 		{F3C22ED3-E95E-43E6-906D-568E8AEAB270}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3C22ED3-E95E-43E6-906D-568E8AEAB270}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3C22ED3-E95E-43E6-906D-568E8AEAB270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37AAE12C-CF2C-467E-8926-168EF678AFD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37AAE12C-CF2C-467E-8926-168EF678AFD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37AAE12C-CF2C-467E-8926-168EF678AFD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37AAE12C-CF2C-467E-8926-168EF678AFD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{942AA48B-30D5-4939-B690-D465ADA4B6CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{942AA48B-30D5-4939-B690-D465ADA4B6CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{942AA48B-30D5-4939-B690-D465ADA4B6CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{942AA48B-30D5-4939-B690-D465ADA4B6CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
