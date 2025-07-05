@@ -14,7 +14,7 @@ jobs:
           
       - name: Install dependencies
         run: dotnet restore
-         working-directory: ./E-commerceSystem
+         working-directory:./E-commerceSystem
          
       - name: Build
         run: dotnet build --configuration Release --no-restore
@@ -22,13 +22,13 @@ jobs:
   
       - name: Publish
         run: dotnet publish --configuration Release --output ./publish --runtime win-x86 
-         working-directory: ./E-commerceSystem
+         working-directory:./E-commerceSystem
         
       - name: Test with .NET
         run: dotnet test
-  working-directory: ./E-commerceSystem
-      - name: Deploy to MonsterASP.NET via WebDeploy
         working-directory: ./E-commerceSystem
+        
+      - name: Deploy to MonsterASP.NET via WebDeploy
         uses: rasmusbuchholdt/simply-web-deploy@2.1.0
         with:
           website-name: ${{ secrets.WEBSITE_NAME }}
