@@ -1,6 +1,6 @@
 using E_commerceSystem.Models.Cart;
 
-namespace E_commerceSystem.BusinessLogicLayer.Services.CheckoutService;
+namespace E_commerceSystem.Services.CheckoutService;
 
 public interface ICheckoutService
 {

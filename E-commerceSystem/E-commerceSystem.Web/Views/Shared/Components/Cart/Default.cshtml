@@ -1,22 +1,81 @@
 @model List<E_commerceSystem.Models.Cart.CartItem>
 
-<h4 class="d-flex justify-content-between align-items-center mb-3">
-    <span class="text-primary">Your cart</span>
-    <span class="badge bg-primary rounded-pill">@Model.Sum(i => i.Quantity)</span>
-</h4>
+@{
+    var subtotal = Model.Sum(i => i.Total);
+    var shippingFee = Model.Where(i => i.IsShippable).Sum(i => (i.Weight ?? 0) * i.Quantity * 0.1); // Example: $0.1 per gram
+    var totalAmount = subtotal + shippingFee;
+    var totalWeight = Model.Where(i => i.IsShippable).Sum(i => (i.Weight ?? 0) * i.Quantity);
+}
+
+
+<h5><strong>🧾 Checkout Summary</strong></h5>
 <ul class="list-group mb-3">
-    @foreach (var item in Model)
+   
+    <div class="console-line"><strong>** Shipment notice **</strong></div>
+    @foreach (var item in Model.Where(i => i.IsShippable))
     {
-        <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-                <h6 class="my-0">@item.Name</h6>
-                <small class="text-muted">@item.Quantity x $@item.Price</small>
-            </div>
-            <span class="text-muted">$@item.Total</span>
+        <li class="list-group-item">
+        <div class="d-flex justify-content-between align-items-center">
+        <div class="console-line">@item.Quantity x @item.Name</div>
+        <div class="console-line">@((item.Weight * item.Quantity) ?? 0)g</div>
+        </div>
         </li>
     }
+    <div class="console-line">Total package weight @(totalWeight >= 1000 ? $"{totalWeight/1000}kg" : $"{totalWeight}g")</div>
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    @item.Quantity x @item.Name
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span>$@item.Total</span>
+                    <button class="btn btn-sm btn-outline-danger remove-from-cart-btn"
+                            data-product-id="@item.ProductId"
+                            title="Remove item">
+                        &times;
+                    </button>
+                </div>
+            </div>
+        </li>
+    }
+
+
     <li class="list-group-item d-flex justify-content-between">
-        <span>Total (USD)</span>
-        <strong>$@Model.Sum(i => i.Total)</strong>
+        <span><strong>Subtotal</strong></span>
+        <strong>$@subtotal</strong>
     </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+        <span><strong>Shipping</strong></span>
+        <strong>$@string.Format("{0:0.00}", shippingFee)</strong>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+        <span><strong>Total</strong></span>
+        <strong>$@string.Format("{0:0.00}", totalAmount)</strong>
+    </li>
+       
 </ul>
+
+<script>
+    $(document).on("click", ".remove-from-cart-btn", function (e) {
+        e.preventDefault();
+        const productId = $(this).data("product-id");
+
+        $.ajax({
+            type: "POST",
+            url: "/Cart/RemoveFromCart",
+            data: { productId: productId },
+            success: function () {
+                // Reload the cart sidebar
+                $("#cartSidebar").load("/CartComponent");
+            },
+            error: function (xhr) {
+                const msg = xhr.responseJSON?.message || "Error removing item.";
+                alert(msg);
+            }
+        });
+    });
+</script>

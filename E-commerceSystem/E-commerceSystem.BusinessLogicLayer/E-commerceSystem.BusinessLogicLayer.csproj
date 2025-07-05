@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Services\" />
+      <ProjectReference Include="..\E-commerceSystem.Web\E-commerceSystem.Web.csproj" />
     </ItemGroup>
 
 </Project>
