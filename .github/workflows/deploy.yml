@@ -14,24 +14,25 @@ jobs:
           
       - name: Install dependencies
         run: dotnet restore
-         working-directory:./E-commerceSystem
+        working-directory: ./E-commerceSystem
          
       - name: Build
         run: dotnet build --configuration Release --no-restore
         working-directory: ./E-commerceSystem
   
       - name: Publish
-        run: dotnet publish --configuration Release --output ./publish --runtime win-x86 
-         working-directory:./E-commerceSystem
+        run: dotnet publish --configuration Release --output ./publish
+        working-directory: ./E-commerceSystem
         
       - name: Test with .NET
         run: dotnet test
         working-directory: ./E-commerceSystem
         
       - name: Deploy to MonsterASP.NET via WebDeploy
-        uses: rasmusbuchholdt/simply-web-deploy@2.1.0
+        uses: rasmusbuchholdt/simply-web-deploy@v2.1.0
         with:
           website-name: ${{ secrets.WEBSITE_NAME }}
           server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
           server-username: ${{ secrets.SERVER_USERNAME }}
           server-password: ${{ secrets.SERVER_PASSWORD }}
+          publish-folder: ./E-commerceSystem/publish
