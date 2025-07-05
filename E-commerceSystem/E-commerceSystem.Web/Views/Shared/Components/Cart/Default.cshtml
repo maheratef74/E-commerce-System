@@ -1,0 +1,22 @@
+@model List<E_commerceSystem.Models.Cart.CartItem>
+
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-primary">Your cart</span>
+    <span class="badge bg-primary rounded-pill">@Model.Sum(i => i.Quantity)</span>
+</h4>
+<ul class="list-group mb-3">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+                <h6 class="my-0">@item.Name</h6>
+                <small class="text-muted">@item.Quantity x $@item.Price</small>
+            </div>
+            <span class="text-muted">$@item.Total</span>
+        </li>
+    }
+    <li class="list-group-item d-flex justify-content-between">
+        <span>Total (USD)</span>
+        <strong>$@Model.Sum(i => i.Total)</strong>
+    </li>
+</ul>
